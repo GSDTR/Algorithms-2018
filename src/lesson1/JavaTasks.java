@@ -2,6 +2,11 @@ package lesson1;
 
 import kotlin.NotImplementedError;
 
+import java.io.*;
+import java.util.*;
+
+import static java.lang.Integer.min;
+
 @SuppressWarnings("unused")
 public class JavaTasks {
     /**
@@ -96,8 +101,25 @@ public class JavaTasks {
      * 99.5
      * 121.3
      */
-    static public void sortTemperatures(String inputName, String outputName) {
-        throw new NotImplementedError();
+    // Трудоёмкость - O(n)
+    // Ресурсоёмкость - O(n)
+    static public void sortTemperatures(String inputName, String outputName)
+            throws IllegalArgumentException, IOException{
+        LinkedList<Double> listOfTemperatures = new LinkedList<>();
+        BufferedReader bufferedReader = new BufferedReader(new FileReader(inputName));
+        String currentLine;
+        while ((currentLine = bufferedReader.readLine()) != null) {
+            double temperature = Double.parseDouble(currentLine);
+            if ((temperature >= -237.0) || (temperature <= 500.0))
+                listOfTemperatures.add(temperature);
+            }
+        Collections.sort(listOfTemperatures);
+        BufferedWriter bufferedWriter = new BufferedWriter(new FileWriter(outputName));
+        for (double i: listOfTemperatures) {
+            bufferedWriter.write(String.valueOf(i));
+            bufferedWriter.newLine();
+        }
+        bufferedWriter.close();
     }
 
     /**
@@ -129,8 +151,43 @@ public class JavaTasks {
      * 2
      * 2
      */
-    static public void sortSequence(String inputName, String outputName) {
-        throw new NotImplementedError();
+    // Трудоёмкость - O(n)
+    // Ресурсоёмкость - O(n)
+    static public void sortSequence(String inputName, String outputName)
+            throws IOException, IllegalFormatException {
+        ArrayList<Integer> listOfNumbers = new ArrayList<>();
+        HashMap<Integer, Integer> map = new HashMap<>();
+        int count = 1, number, value, minOfNumbers = Integer.MAX_VALUE;
+        String currentLine;
+        BufferedReader bufferedReader = new BufferedReader(new FileReader(inputName));
+        while ((currentLine = bufferedReader.readLine()) != null) {
+            number = Integer.parseInt(currentLine);
+            listOfNumbers.add(number);
+            if (map.containsKey(number)) {
+                value = map.get(number);
+                map.put(number, (value + 1));
+                if ((value + 1) > count) {
+                    count = value + 1;
+                    minOfNumbers = number;
+                }
+                else if ((value + 1) == count) minOfNumbers = min(minOfNumbers, number);
+            } else {
+                map.put(number, 1);
+                if (count == 1) minOfNumbers = min(minOfNumbers, number);
+            }
+        }
+        BufferedWriter bufferedWriter = new BufferedWriter(new FileWriter(outputName));
+        for (Integer i: listOfNumbers) {
+            if (i != minOfNumbers) {
+                bufferedWriter.write(String.valueOf(i));
+                bufferedWriter.newLine();
+            }
+        }
+        for (int i = 0; i < count; i++) {
+            bufferedWriter.write(String.valueOf(minOfNumbers));
+            bufferedWriter.newLine();
+        }
+        bufferedWriter.close();
     }
 
     /**

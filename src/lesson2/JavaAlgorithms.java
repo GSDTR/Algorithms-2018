@@ -3,6 +3,7 @@ package lesson2;
 import kotlin.NotImplementedError;
 import kotlin.Pair;
 
+import java.io.IOException;
 import java.util.Set;
 
 @SuppressWarnings("unused")
@@ -81,8 +82,13 @@ public class JavaAlgorithms {
      * Х   Х
      * Х х Х
      */
+    // Трудоёмкость - O(n)
+    // Ресурсоёмкость - O(n)
     static public int josephTask(int menNumber, int choiceInterval) {
-        throw new NotImplementedError();
+        int res = 0;
+        for (int i = 1; i <= menNumber; ++i)
+            res = (res + choiceInterval) % i;
+        return res + 1;
     }
 
     /**
@@ -96,8 +102,27 @@ public class JavaAlgorithms {
      * Если имеется несколько самых длинных общих подстрок одной длины,
      * вернуть ту из них, которая встречается раньше в строке first.
      */
-    static public String longestCommonSubstring(String firs, String second) {
-        throw new NotImplementedError();
+    // Трудоёмкость - O(n * m)
+    // Ресурсоёмкость - O(n)
+    static public String longestCommonSubstring(String first, String second) {
+        int[][] matrix = new int[first.length()][second.length()];
+        int max = 0, numberOfFirstSymbol = 0;
+        for (int i = 0; i < first.length(); i++) {
+            for (int j = 0; j < second.length(); j++) {
+                if (first.charAt(i) == second.charAt(j)) {
+                    matrix[i][j] += 1;
+                    if (i != 0 && j != 0) {
+                        matrix[i][j] = matrix[i - 1][j - 1] + 1;
+                    }
+                    if (matrix[i][j] > max) {
+                        max = matrix[i][j];
+                        numberOfFirstSymbol = i;
+                    }
+                }
+            }
+        }
+        if (max == 0) return "";
+        return first.substring(numberOfFirstSymbol + 1 - max, numberOfFirstSymbol + 1);
     }
 
     /**
