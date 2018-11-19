@@ -102,7 +102,7 @@ public class BinaryTree<T extends Comparable<T>> extends AbstractSet<T> implemen
 
         private Node<T> current = null;
 
-        private BinaryTreeIterator() {}
+        private BinaryTreeIterator() { }
 
         /**
          * Поиск следующего элемента
@@ -112,6 +112,7 @@ public class BinaryTree<T extends Comparable<T>> extends AbstractSet<T> implemen
             // TODO
             throw new NotImplementedError();
         }
+
 
         @Override
         public boolean hasNext() {
@@ -169,22 +170,46 @@ public class BinaryTree<T extends Comparable<T>> extends AbstractSet<T> implemen
      * Найти множество всех элементов меньше заданного
      * Сложная
      */
+    // Трудоёмкость - O(n)
+    // Ресурсоёмкость - O(n)
     @NotNull
     @Override
     public SortedSet<T> headSet(T toElement) {
-        // TODO
-        throw new NotImplementedError();
+        if (toElement == null) throw new IllegalArgumentException();
+        SortedSet<T> set = new TreeSet<>();
+        findHeadSet(toElement, set, root);
+        return set;
+    }
+
+    public void findHeadSet(T toElement, SortedSet<T> set, Node<T> node){
+        if (node.value.compareTo(toElement) < 0){
+            set.add(node.value);
+            if (node.right != null) findHeadSet(toElement, set, node.right);
+        }
+        if (node.left != null) findHeadSet(toElement, set, node.left);
     }
 
     /**
      * Найти множество всех элементов больше или равных заданного
      * Сложная
      */
+    // Трудоёмкость - O(n)
+    // Ресурсоёмкость - O(n)
     @NotNull
     @Override
-    public SortedSet<T> tailSet(T fromElement) {
-        // TODO
-        throw new NotImplementedError();
+    public SortedSet<T> tailSet(T toElement) {
+        if (toElement == null) throw new IllegalArgumentException();
+        SortedSet<T> set = new TreeSet<>();
+        findTailSet(toElement, set, root);
+        return set;
+    }
+
+    public void findTailSet(T toElement, SortedSet<T> set, Node<T> node){
+        if (node.value.compareTo(toElement) >= 0){
+            set.add(node.value);
+            if (node.left != null) findTailSet(toElement, set, node.left);
+        }
+        if (node.right != null) findTailSet(toElement, set, node.right);
     }
 
     @Override

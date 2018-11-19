@@ -83,7 +83,7 @@ public class JavaAlgorithms {
      * Х х Х
      */
     // Трудоёмкость - O(n)
-    // Ресурсоёмкость - O(n)
+    // Ресурсоёмкость - O(1)
     static public int josephTask(int menNumber, int choiceInterval) {
         int res = 0;
         for (int i = 1; i <= menNumber; ++i)
@@ -103,7 +103,7 @@ public class JavaAlgorithms {
      * вернуть ту из них, которая встречается раньше в строке first.
      */
     // Трудоёмкость - O(n * m)
-    // Ресурсоёмкость - O(n)
+    // Ресурсоёмкость - O(n * m)
     static public String longestCommonSubstring(String first, String second) {
         int[][] matrix = new int[first.length()][second.length()];
         int max = 0, numberOfFirstSymbol = 0;

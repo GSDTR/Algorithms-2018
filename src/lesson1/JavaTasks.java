@@ -155,8 +155,8 @@ public class JavaTasks {
     // Ресурсоёмкость - O(n)
     static public void sortSequence(String inputName, String outputName)
             throws IOException, IllegalFormatException {
-        ArrayList<Integer> listOfNumbers = new ArrayList<>();
-        HashMap<Integer, Integer> map = new HashMap<>();
+        List<Integer> listOfNumbers = new ArrayList<>();
+        Map<Integer, Integer> map = new HashMap<>();
         int count = 1, number, value, minOfNumbers = Integer.MAX_VALUE;
         String currentLine;
         BufferedReader bufferedReader = new BufferedReader(new FileReader(inputName));
