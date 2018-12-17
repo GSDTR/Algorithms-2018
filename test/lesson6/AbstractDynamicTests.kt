@@ -9,26 +9,31 @@ abstract class AbstractDynamicTests {
         assertEquals("13", longestCommonSubSequence("123", "13"))
         assertEquals("здс", longestCommonSubSequence("здравствуй мир", "мы здесь"))
         assertEquals("emt ole", longestCommonSubSequence("nematode knowledge", "empty bottle"))
-        assertEquals("e kerwelkkd r", longestCommonSubSequence(
+        assertEquals("erhlkrw kjk r", longestCommonSubSequence(
                 "oiweijgw kejrhwejelkrw kjhdkfjs hrk",
                 "perhkhk lerkerorwetp lkjklvvd durltr"
         ))
-        assertEquals(""" дд саы чтых,
-евшнео ваа се сви дн.
+        assertEquals("""дам ест вл н вшнео ваа се сви дн.
         """.trimIndent(), longestCommonSubSequence(
                 """
-Мой дядя самых честных правил,
+Мойдядя самых честных правил,
 Когда не в шутку занемог,
 Он уважать себя заставил
 И лучше выдумать не мог.
                 """.trimIndent(),
                 """
-Так думал молодой повеса,
+Такдумал молодой повеса,
 Летя в пыли на почтовых,
 Всевышней волею Зевеса
 Наследник всех своих родных.
                 """.trimIndent()
         ))
+        assertEquals("world", longestCommonSubSequence("hello world", "wrorld"))
+        assertEquals("tobe", longestCommonSubSequence("tobe", "trouble"))
+        assertEquals("000", longestCommonSubSequence("0 00   0 00  0", "000"))
+        assertEquals("", longestCommonSubSequence("", "LRRRE"))
+        assertEquals("", longestCommonSubSequence("ResT", "rESt"))
+        assertEquals("k", (longestCommonSubSequence("abcdefghijk", "kjihgfrdcba")))
     }
 
     fun longestIncreasingSubSequence(longestIncreasingSubSequence: (List<Int>) -> List<Int>) {
@@ -50,6 +55,8 @@ abstract class AbstractDynamicTests {
         assertEquals(1, shortestPathOnField("input/field_in2.txt"))
         assertEquals(12, shortestPathOnField("input/field_in1.txt"))
         assertEquals(43, shortestPathOnField("input/field_in3.txt"))
+        assertEquals(31, shortestPathOnField("input/field_in4.txt"))
+        assertEquals(34, shortestPathOnField("input/field_in5.txt"))
     }
 
 }
